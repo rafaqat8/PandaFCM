@@ -45,8 +45,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
 
-//    implementation project(path: ':FCMLib')
+    implementation project(path: ':FCMLib')
+//
+//    implementation 'com.github.Funsol-DevOps:PandaFCM:v1.0'
 
-    implementation 'com.github.Funsol-DevOps:PandaFCM:v1.0'
 
 }
