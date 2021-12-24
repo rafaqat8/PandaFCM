@@ -1,5 +1,8 @@
 # PandaFCM (Firebase Cloud Messaging)
 
+[![](https://jitpack.io/v/Funsol-DevOps/PandaFCM.svg)](https://jitpack.io/#Funsol-DevOps/PandaFCM)
+
+
 PandaFCM is a Firebase Cloud Messaging Android app that demonstrates registering your Android app for notifications and handling the receipt of a message. InstanceID allows easy registration while FirebaseMessagingService and FirebaseInstanceIDService enable token refreshes and message handling on the client.
 
 > Read more about [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
@@ -41,7 +44,7 @@ Add maven repository in project level build.gradle or in latest project setting.
 Add PandaFCM dependencies in App level build.gradle.
 ```
     dependencies {
-           implementation 'com.github.Funsol-DevOps:PandaFCM:v1.1'
+           implementation 'com.github.Funsol-DevOps:PandaFCM:1.5'
     }
 ```  
 
