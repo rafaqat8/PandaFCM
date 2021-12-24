@@ -52,7 +52,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.Funsol-DevOps'
-                artifactId = 'PandaFCM'
+                artifactId = 'PandaFCM' 
                 version = '1.1'
             }
             debug(MavenPublication) {
