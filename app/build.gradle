@@ -43,5 +43,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
 
     implementation project(path: ':FCMLib')
+//    implementation 'com.github.Funsol-DevOps:PandaFCM:v1.1'
 
 }
