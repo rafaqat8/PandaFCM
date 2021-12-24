@@ -1,5 +1,6 @@
 package com.pandalibs.fcmlib
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -38,8 +39,9 @@ class PandaFirebaseMessagingService : FirebaseMessagingService() {
 
             //Check already installed app
             if (packageName != null) {
-                val alreadyInstalled = isAppInstalled(packageName, this)
-                if (alreadyInstalled) return
+
+                //val alreadyInstalled = isAppInstalled(packageName, this)
+                //if (alreadyInstalled) return
 
                 //send notification
                 if (icon == null || title == null || shortDesc == null) {
@@ -57,6 +59,7 @@ class PandaFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(p0)
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private fun sendNotification(
         icon: String,
         title: String,
@@ -67,17 +70,21 @@ class PandaFirebaseMessagingService : FirebaseMessagingService() {
     ) {
 
         //Open PlayStore
-        val intent = try {
-            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$storePackage"))
-        } catch (e: ActivityNotFoundException) {
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$storePackage")
-            )
+        val intent = if (!isAppInstalled(storePackage, this)) {
+            setStoreIntent(storePackage)
+        } else {
+            openApp(storePackage)
         }
+
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT)
+            PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_ONE_SHOT
+            )
         } else {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         }
@@ -126,6 +133,26 @@ class PandaFirebaseMessagingService : FirebaseMessagingService() {
             remoteViews.setViewVisibility(R.id.iv_feature, View.VISIBLE)
             Picasso.get().load(image)
                 .into(remoteViews, R.id.iv_feature, notificationID, notificationBuilder.build())
+        }
+    }
+
+    private fun openApp(storePackage: String): Intent {
+        return try {
+            packageManager.getLaunchIntentForPackage(storePackage) ?: setStoreIntent(storePackage)
+        } catch (e: Exception) {
+            setStoreIntent(storePackage)
+        }
+    }
+
+
+    private fun setStoreIntent(storePackage: String): Intent {
+        return try {
+            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$storePackage"))
+        } catch (e: ActivityNotFoundException) {
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$storePackage")
+            )
         }
     }
 

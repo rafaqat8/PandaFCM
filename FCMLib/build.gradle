@@ -39,13 +39,12 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
 
+/*
 afterEvaluate {
     publishing {
         publications {
@@ -53,15 +52,14 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.Funsol-DevOps'
                 artifactId = 'PandaFCM' 
-                version = '1.1'
+                version = '1.3'
             }
             debug(MavenPublication) {
                 from components.debug
                 groupId = 'com.github.Funsol-DevOps'
                 artifactId = 'PandaFCM'
-                version = '1.1'
+                version = '1.3'
             }
-
         }
     }
-}
+}*/
