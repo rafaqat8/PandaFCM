@@ -14,23 +14,19 @@ PandaFCM is a Firebase Cloud Messaging Android app that demonstrates registering
 
 #### Classpath
 ```
-    classpath 'com.google.gms:google-services:4.3.10'
+    classpath 'com.google.gms:google-services:latest-version'
 ```
 #### Plugin
 ```
     id 'com.google.gms.google-services'
 ```
 #### Dependencies
-```
-    implementation platform('com.google.firebase:firebase-bom:28.4.2')
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics' 
-```
+no dependencies required
 
 
 ### Step 2
 
-Add maven repository in project level build.gradle.
+Add maven repository in project level build.gradle or in latest project setting.gradle file
 ```
     repositories {
         google()
@@ -45,7 +41,7 @@ Add maven repository in project level build.gradle.
 Add PandaFCM dependencies in App level build.gradle.
 ```
     dependencies {
-           implementation 'com.github.Funsol-DevOps:PandaFCM:v1.0'
+           implementation 'com.github.Funsol-DevOps:PandaFCM:v1.1'
     }
 ```  
 
@@ -53,9 +49,7 @@ Add PandaFCM dependencies in App level build.gradle.
 ### Step 4
 
 Finally intialize Firebase and setup FCM in application class or in your "MainActivity"
-```
-    FirebaseApp.initializeApp(this)
-```
+
 ```
     PandaFCM.setupFCM(this, "YourTopicName")
 ```
